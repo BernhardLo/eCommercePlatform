@@ -1,8 +1,5 @@
 ﻿ string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=Orders;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            
-			
-			
-			SqlConnection con = new SqlConnection(conStr);
+            SqlConnection con = new SqlConnection(conStr);
             SqlCommand cmd = new SqlCommand("Select * from Orders", con);
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
