@@ -1,29 +1,25 @@
 ﻿
 html, body {
+    background-color: steelblue;
     height: 100%;
 }
+
 .header {
     height: 142px;
     background-color: lightgray;
 }
+
 .wrapper {
     min-height: 100%;
     height: auto !important;
     height: 100%;
     margin: 0 auto -142px;
-    background-color: steelblue;
+    font-size: xx-large;
 }
+
 .footer, .push {
     height: 142px;
     background-color: grey;
+    color: black;
+    font-size: large;
 }
-
- #loginbutton {
-     line-height: 19px;
-     width: 55px;
-     margin-top: 4px;
-     margin-right: 55px;
-     position:absolute;
-     top:0;
-     right:0;
- }
