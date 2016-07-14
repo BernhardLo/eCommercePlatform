@@ -4,18 +4,41 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <title>Kontorsprylar AB</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/jquery-1.9.1.intellisense.js"></script>
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+    <link href="scripts/Ecp.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        <%--Test--%>
-<%--            Test2--%>
-        </asp:ContentPlaceHolder>
+    <div class="header">Placeholder for header
+        <div><input id="loginbutton" type="button" value="Login"></div>
     </div>
-    </form>
+
+    <nav class="navbar navbar-inverse">
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="Contact.aspx">Kontorsprylar AB</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="Register.aspx">Register</a></li>
+                <li><a href="Shop.aspx">Shop</a></li>
+                <li><a href="Contact.aspx">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+   
+<div class="wrapper">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</div>
+    <div class="push">        
+</div>
+    <div class="footer">
+    Footer placeholder
+    </div>
 </body>
 </html>
