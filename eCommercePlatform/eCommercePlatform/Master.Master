@@ -9,7 +9,7 @@
     <script src="scripts/jquery-1.9.1.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="scripts/Ecp.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Ecp.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div id="wrapper">
@@ -22,7 +22,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.aspx" style="color: white; font-size: large;">Kontorsprylar AB</a>
+                        <a class="navbar-brand" href="/Index.aspx" style="color: white; font-size: large;">Kontorsprylar AB</a>
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
@@ -33,22 +33,22 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a data-toggle="modal" href="#signupModal">
+                                <a data-toggle="modal" href="/Index.aspx#signupModal">
                                     <span class="glyphicon glyphicon-user"></span>
                                     &nbsp;&nbsp;Sign Up
                                 </a>
                             </li>
                             <li>
-                                <a data-toggle="modal" href="#loginModal">
+                                <a data-toggle="modal" href="/Index.aspx#loginModal">
                                     <span class="glyphicon glyphicon-log-in"></span>
                                     &nbsp;&nbsp;Login
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/Pages/Cart.aspx">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
                                     &nbsp;&nbsp;Cart&nbsp;
-                                    <span class="badge">10</span>
+                                    <span class="badge">1</span>
                                 </a>
                             </li>
                         </ul>
@@ -139,9 +139,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="nav nav-pills red">
-                        <li class="active"><a class="footerlink" href="index.aspx" data-toggle="tab">Home</a></li>
-                        <li><a class="footerlink" href="#" data-toggle="tab">About Us</a></li>
-                        <li><a class="footerlink" href="#" data-toggle="tab">Contact Us</a></li>
+                        <asp:ContentPlaceHolder ID="litFootLinks" runat="server"></asp:ContentPlaceHolder>
                         <li class="pull-right">Created by
                         <br />
                             Aladin, Bernhard, Dino</li>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="eCommercePlatform.Cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <link href="scripts/Ecp.css" rel="stylesheet" type="text/css"/>
+    <link href="../Content/Ecp.css" rel="stylesheet" type="text/css"/>
     <div class="container">
 	<table id="cart" class="table table-hover table-condensed">
     				<thead>
@@ -29,8 +29,8 @@
 							</td>
 							<td data-th="Subtotal" class="text-center">1.99</td>
 							<td class="actions" data-th="">
-								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+								<button class="btn btn-info btn-sm"><span class="glyphicon glyphicon-refresh"></span></button>
+								<button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>								
 							</td>
 						</tr>
 					</tbody>
@@ -47,4 +47,10 @@
 					</tfoot>
 				</table>
 </div>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="litFootLinks" runat="server">
+    <li><a href="../Index.aspx">Home</a></li>
+    <li><a href="About.aspx">About Us</a></li>
+    <li><a href="ContactUs.aspx">Contact Us</a></li>
 </asp:Content>

@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace eCommercePlatform
+namespace eCommercePlatform.Controls
 {
-    public partial class Master : System.Web.UI.MasterPage
+    public partial class LoginModal : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
     }
 }
