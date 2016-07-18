@@ -101,8 +101,10 @@
                         </div>
                         <div class="modal-body">
                             <form role="form">
-                                <div class="form-group">
-                                    <label for="newUsrname"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Username</label>
+                                 <div class="form-group">
+                                    <label for="newFN"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;User</label>
+                                    <input type="text" class="form-control" id="newFN" placeholder="Enter firstname" />
+                                    <input type="text" class="form-control" id="newLN" placeholder="Enter lastname" />
                                     <input type="text" class="form-control" id="newUsrname" placeholder="Enter username" />
                                 </div>
                                 <div class="form-group">
