@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BackOffice.Properties
+namespace BackOffice1.Properties
 {
 
 
