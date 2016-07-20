@@ -17,10 +17,13 @@ namespace BackOffice1
         static SqlConnection myConnection = new SqlConnection(conStr);
         static SqlCommand myCommand = new SqlCommand();
 
-        public MainWindow()
+        public MainWindow(string usr, bool isAdmin)
         {
             InitializeComponent();
             DisplayProducts();
+            labelUserInfo.Text = $"Logged in as {usr}";
+            if (isAdmin)
+                labelUserInfo.Text += " (Admin)";
         }
 
         private void DisplayProducts ()
@@ -48,6 +51,10 @@ namespace BackOffice1
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
             buttonSortByNewest.Hide();
+
+            menuItemUsers.Checked = false;
+            menuItemProducts.Checked = true;
+            menuItemOrders.Checked = false;
 
             label4.Hide();
             listBox4.Hide();
@@ -90,6 +97,9 @@ namespace BackOffice1
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
             buttonSortByNewest.Hide();
+            menuItemUsers.Checked = true;
+            menuItemProducts.Checked = false;
+            menuItemOrders.Checked = false;
 
             label4.Show();
             label4.Text = "Orders";
@@ -134,6 +144,10 @@ namespace BackOffice1
             buttonSortByUser.Show();
             buttonSortByNewest.Show();
 
+            menuItemUsers.Checked = false;
+            menuItemProducts.Checked = false;
+            menuItemOrders.Checked = true;
+
             label4.Hide();
             listBox4.Hide();
         }
@@ -172,7 +186,8 @@ namespace BackOffice1
 
         private void menuItemManage_Click(object sender, EventArgs e)
         {
-
+            Accounts acc = new Accounts();
+            acc.Show();
         }
 
         private void menuItem6_Click(object sender, EventArgs e)

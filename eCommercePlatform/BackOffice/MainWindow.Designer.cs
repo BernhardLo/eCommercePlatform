@@ -62,6 +62,7 @@
             this.buttonSortByUser = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.listBox4 = new System.Windows.Forms.ListBox();
+            this.labelUserInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -339,11 +340,21 @@
             this.listBox4.TabIndex = 27;
             this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
             // 
+            // labelUserInfo
+            // 
+            this.labelUserInfo.AutoSize = true;
+            this.labelUserInfo.Location = new System.Drawing.Point(12, 9);
+            this.labelUserInfo.Name = "labelUserInfo";
+            this.labelUserInfo.Size = new System.Drawing.Size(35, 13);
+            this.labelUserInfo.TabIndex = 29;
+            this.labelUserInfo.Text = "label5";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.labelUserInfo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox4);
             this.Controls.Add(this.buttonSortByValue);
@@ -370,7 +381,7 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBoxProductInfo);
             this.Menu = this.mainMenu1;
-            this.Name = "BackOffice";
+            this.Name = "MainWindow";
             this.Text = "BackOffice";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
@@ -413,6 +424,7 @@
         private System.Windows.Forms.Button buttonSortByUser;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.Label labelUserInfo;
     }
 }
 

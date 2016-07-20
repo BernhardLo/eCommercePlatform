@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,14 @@ namespace BackOffice1
 {
     public partial class Login : Form
     {
+        static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=Orders;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static SqlConnection myConnection = new SqlConnection(conStr);
+        static SqlCommand myCommand = new SqlCommand();
         public Login()
         {
             InitializeComponent();
-        }
+            this.AcceptButton = buttonOk;
+    }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -27,15 +32,36 @@ namespace BackOffice1
             if (ValidUserAndPassword())
             {
                 this.Hide();
-                MainWindow main = new MainWindow();
+                MainWindow main = new MainWindow(textBoxUserName.Text, true);
                 main.ShowDialog();
+            } else
+            {
+                MessageBox.Show("Wrong username or password.");
             }
         }
 
-        private static bool ValidUserAndPassword ()
+        private bool ValidUserAndPassword ()
         {
-            bool ret = true;
+            //bool ret = false;
+            string usr = textBoxUserName.Text;
+            string pw = textBoxPassword.Text;
 
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"select AdminPassword from [dinotest].[eCommercePlattform].[dbo].[Admin] where AdminLogin = {usr}";
+
+               // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
+                SqlDataReader myReader = myCommand.ExecuteReader();
+                MessageBox.Show(myReader.ToString());
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
             return ret;
         }
     }
