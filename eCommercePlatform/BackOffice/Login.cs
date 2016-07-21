@@ -42,7 +42,7 @@ namespace BackOffice1
 
         private bool ValidUserAndPassword ()
         {
-            //bool ret = false;
+            bool ret = false;
             string usr = textBoxUserName.Text;
             string pw = textBoxPassword.Text;
 
