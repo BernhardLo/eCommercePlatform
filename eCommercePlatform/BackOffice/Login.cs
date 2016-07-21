@@ -13,14 +13,14 @@ namespace BackOffice1
 {
     public partial class Login : Form
     {
-        static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=Orders;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=eCommercePlattform;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         static SqlConnection myConnection = new SqlConnection(conStr);
         static SqlCommand myCommand = new SqlCommand();
         public Login()
         {
             InitializeComponent();
             this.AcceptButton = buttonOk;
-    }
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -50,18 +50,24 @@ namespace BackOffice1
             {
                 myConnection.Open();
                 myCommand.Connection = myConnection;
-                myCommand.CommandText = $"select AdminPassword from [dinotest].[eCommercePlattform].[dbo].[Admin] where AdminLogin = {usr}";
+                myCommand.CommandText = $"select AdminPassword from [Admin] where AdminLogin = '{usr}'";
 
-               // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
+                // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
+                // string i = myCommand.ExecuteNonQuery().ToString();
+
                 SqlDataReader myReader = myCommand.ExecuteReader();
-                MessageBox.Show(myReader.ToString());
-
+                while (myReader.Read())
+                {
+                    if (myReader[0].ToString() == pw)
+                        ret = true;
+                }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally
             {
                 myConnection.Close();
             }
+
             return ret;
         }
     }
