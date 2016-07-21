@@ -44,6 +44,7 @@ namespace BackOffice1
         {
             if (allFieldsValid())
             {
+
                 try
                 {
                     myConnection.Open();
