@@ -46,8 +46,6 @@
             this.checkBoxAvailable = new System.Windows.Forms.CheckBox();
             this.textBoxProductInfo = new System.Windows.Forms.TextBox();
             this.labelProductInfo = new System.Windows.Forms.Label();
-            this.buttonCreateCategory = new System.Windows.Forms.Button();
-            this.buttonUpdateCategory = new System.Windows.Forms.Button();
             this.buttonDeleteCategory = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,6 +61,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.labelUserInfo = new System.Windows.Forms.Label();
+            this.buttonUpdateCategory2 = new System.Windows.Forms.Button();
+            this.buttonCreateCategory2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -197,24 +197,6 @@
             this.labelProductInfo.TabIndex = 10;
             this.labelProductInfo.Text = "Information";
             // 
-            // buttonCreateCategory
-            // 
-            this.buttonCreateCategory.Location = new System.Drawing.Point(33, 412);
-            this.buttonCreateCategory.Name = "buttonCreateCategory";
-            this.buttonCreateCategory.Size = new System.Drawing.Size(117, 23);
-            this.buttonCreateCategory.TabIndex = 11;
-            this.buttonCreateCategory.Text = "Create Category";
-            this.buttonCreateCategory.UseVisualStyleBackColor = true;
-            // 
-            // buttonUpdateCategory
-            // 
-            this.buttonUpdateCategory.Location = new System.Drawing.Point(33, 441);
-            this.buttonUpdateCategory.Name = "buttonUpdateCategory";
-            this.buttonUpdateCategory.Size = new System.Drawing.Size(117, 23);
-            this.buttonUpdateCategory.TabIndex = 12;
-            this.buttonUpdateCategory.Text = "Update Category";
-            this.buttonUpdateCategory.UseVisualStyleBackColor = true;
-            // 
             // buttonDeleteCategory
             // 
             this.buttonDeleteCategory.Location = new System.Drawing.Point(33, 470);
@@ -223,6 +205,7 @@
             this.buttonDeleteCategory.TabIndex = 13;
             this.buttonDeleteCategory.Text = "Delete Category";
             this.buttonDeleteCategory.UseVisualStyleBackColor = true;
+            this.buttonDeleteCategory.Click += new System.EventHandler(this.buttonDeleteCategory_Click_1);
             // 
             // textBox1
             // 
@@ -269,7 +252,7 @@
             // 
             // buttonDeleteUser
             // 
-            this.buttonDeleteUser.Location = new System.Drawing.Point(34, 470);
+            this.buttonDeleteUser.Location = new System.Drawing.Point(148, 499);
             this.buttonDeleteUser.Name = "buttonDeleteUser";
             this.buttonDeleteUser.Size = new System.Drawing.Size(117, 23);
             this.buttonDeleteUser.TabIndex = 21;
@@ -278,7 +261,7 @@
             // 
             // buttonUpdateUser
             // 
-            this.buttonUpdateUser.Location = new System.Drawing.Point(34, 441);
+            this.buttonUpdateUser.Location = new System.Drawing.Point(33, 441);
             this.buttonUpdateUser.Name = "buttonUpdateUser";
             this.buttonUpdateUser.Size = new System.Drawing.Size(117, 23);
             this.buttonUpdateUser.TabIndex = 20;
@@ -288,7 +271,7 @@
             // 
             // buttonCreateUser
             // 
-            this.buttonCreateUser.Location = new System.Drawing.Point(34, 412);
+            this.buttonCreateUser.Location = new System.Drawing.Point(33, 409);
             this.buttonCreateUser.Name = "buttonCreateUser";
             this.buttonCreateUser.Size = new System.Drawing.Size(117, 23);
             this.buttonCreateUser.TabIndex = 23;
@@ -298,7 +281,7 @@
             // 
             // buttonSortByValue
             // 
-            this.buttonSortByValue.Location = new System.Drawing.Point(33, 412);
+            this.buttonSortByValue.Location = new System.Drawing.Point(34, 409);
             this.buttonSortByValue.Name = "buttonSortByValue";
             this.buttonSortByValue.Size = new System.Drawing.Size(117, 23);
             this.buttonSortByValue.TabIndex = 26;
@@ -307,7 +290,7 @@
             // 
             // buttonSortByNewest
             // 
-            this.buttonSortByNewest.Location = new System.Drawing.Point(33, 470);
+            this.buttonSortByNewest.Location = new System.Drawing.Point(156, 441);
             this.buttonSortByNewest.Name = "buttonSortByNewest";
             this.buttonSortByNewest.Size = new System.Drawing.Size(117, 23);
             this.buttonSortByNewest.TabIndex = 25;
@@ -351,11 +334,33 @@
             this.labelUserInfo.TabIndex = 29;
             this.labelUserInfo.Text = "label5";
             // 
+            // buttonUpdateCategory2
+            // 
+            this.buttonUpdateCategory2.Location = new System.Drawing.Point(34, 441);
+            this.buttonUpdateCategory2.Name = "buttonUpdateCategory2";
+            this.buttonUpdateCategory2.Size = new System.Drawing.Size(116, 23);
+            this.buttonUpdateCategory2.TabIndex = 31;
+            this.buttonUpdateCategory2.Text = "Update Category";
+            this.buttonUpdateCategory2.UseVisualStyleBackColor = true;
+            this.buttonUpdateCategory2.Click += new System.EventHandler(this.buttonUpdateCategory2_Click);
+            // 
+            // buttonCreateCategory2
+            // 
+            this.buttonCreateCategory2.Location = new System.Drawing.Point(33, 409);
+            this.buttonCreateCategory2.Name = "buttonCreateCategory2";
+            this.buttonCreateCategory2.Size = new System.Drawing.Size(116, 23);
+            this.buttonCreateCategory2.TabIndex = 32;
+            this.buttonCreateCategory2.Text = "Create Category";
+            this.buttonCreateCategory2.UseVisualStyleBackColor = true;
+            this.buttonCreateCategory2.Click += new System.EventHandler(this.buttonCreateCategory2_Click_1);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.buttonCreateCategory2);
+            this.Controls.Add(this.buttonUpdateCategory2);
             this.Controls.Add(this.labelUserInfo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox4);
@@ -371,8 +376,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonDeleteCategory);
-            this.Controls.Add(this.buttonUpdateCategory);
-            this.Controls.Add(this.buttonCreateCategory);
             this.Controls.Add(this.labelProductInfo);
             this.Controls.Add(this.checkBoxAvailable);
             this.Controls.Add(this.labelQuantity);
@@ -410,8 +413,6 @@
         private System.Windows.Forms.CheckBox checkBoxAvailable;
         private System.Windows.Forms.TextBox textBoxProductInfo;
         private System.Windows.Forms.Label labelProductInfo;
-        private System.Windows.Forms.Button buttonCreateCategory;
-        private System.Windows.Forms.Button buttonUpdateCategory;
         private System.Windows.Forms.Button buttonDeleteCategory;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
@@ -427,6 +428,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox4;
         private System.Windows.Forms.Label labelUserInfo;
+        private System.Windows.Forms.Button buttonUpdateCategory2;
+        private System.Windows.Forms.Button buttonCreateCategory2;
     }
 }
 

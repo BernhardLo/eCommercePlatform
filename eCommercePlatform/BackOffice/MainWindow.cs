@@ -46,8 +46,8 @@ namespace BackOffice1
             textBoxProductInfo.Show();
             labelProductInfo.Show();
 
-            buttonCreateCategory.Show();
-            buttonUpdateCategory.Show();
+            buttonCreateCategory2.Show();
+            buttonUpdateCategory2.Show();
             buttonDeleteCategory.Show();
             buttonAddProduct.Show();
             buttonUpdateProduct.Show();
@@ -134,8 +134,8 @@ namespace BackOffice1
             textBoxProductInfo.Hide();
             labelProductInfo.Hide();
 
-            buttonCreateCategory.Hide();
-            buttonUpdateCategory.Hide();
+            buttonCreateCategory2.Hide();
+            buttonUpdateCategory2.Hide();
             buttonDeleteCategory.Hide();
             buttonAddProduct.Hide();
             buttonUpdateProduct.Hide();
@@ -201,8 +201,8 @@ namespace BackOffice1
             textBoxProductInfo.Hide();
             labelProductInfo.Hide();
 
-            buttonCreateCategory.Hide();
-            buttonUpdateCategory.Hide();
+            buttonCreateCategory2.Hide();
+            buttonUpdateCategory2.Hide();
             buttonDeleteCategory.Hide();
             buttonAddProduct.Hide();
             buttonUpdateProduct.Hide();
@@ -317,7 +317,7 @@ namespace BackOffice1
 
         }
 
-        private void buttonCreateCategory_Click(object sender, EventArgs e)
+        private void buttonCreateCategory_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -353,38 +353,6 @@ namespace BackOffice1
             //todo delete category
         }
 
-        private void buttonUpdateCategory_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spUpdateCategory";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _cid = new SqlParameter("@CatId", SqlDbType.Int);
-                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
-                _cid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
-                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
-                _title.Value = textBox1.Text;
-                myCommand.Parameters.Add(_cid);
-                myCommand.Parameters.Add(_title);
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
-                {
-                    MessageBox.Show("Category Updated.");
-                }
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally
-            {
-                myConnection.Close();
-            }
-        }
-
         private void textBoxProductName_TextChanged(object sender, EventArgs e)
         {
 
@@ -411,8 +379,8 @@ namespace BackOffice1
                 if (listBox1.SelectedItem.ToString() == "<all>")
                 {
                     ImportProducts();
-                    buttonCreateCategory.Enabled = false;
-                    buttonUpdateCategory.Enabled = false;
+                    buttonCreateCategory2.Enabled = false;
+                    buttonUpdateCategory2.Enabled = false;
                     buttonDeleteCategory.Enabled = false;
 
                 }
@@ -421,8 +389,8 @@ namespace BackOffice1
                     int slc = listBox1.SelectedItem.ToString().IndexOf(";");
                     int currentIndex = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
                     ImportProductsFromCategory(currentIndex);
-                    buttonCreateCategory.Enabled = true;
-                    buttonUpdateCategory.Enabled = true;
+                    buttonCreateCategory2.Enabled = true;
+                    buttonUpdateCategory2.Enabled = true;
                     buttonDeleteCategory.Enabled = true;
                     textBox1.Text = listBox1.SelectedItem.ToString().Substring(slc + 2);
                 }
@@ -474,6 +442,98 @@ namespace BackOffice1
         private void buttonAddProduct_Click(object sender, EventArgs e)
         {
             //todo add product
+        }
+
+        private void buttonCreateCategory2_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"spCreateCategory";
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Clear();
+
+                SqlParameter _new_cid = new SqlParameter("@new_CatId", SqlDbType.Int);
+                _new_cid.Direction = ParameterDirection.Output;
+                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
+                _title.Value = textBox1.Text;
+                myCommand.Parameters.Add(_new_cid);
+                myCommand.Parameters.Add(_title);
+
+                int result = myCommand.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("Category Created.");
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        private void buttonUpdateCategory2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"spUpdateCategory";
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Clear();
+
+                SqlParameter _cid = new SqlParameter("@CatId", SqlDbType.Int);
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                _cid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
+                _title.Value = textBox1.Text;
+                myCommand.Parameters.Add(_cid);
+                myCommand.Parameters.Add(_title);
+
+                int result = myCommand.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("Category Updated.");
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        private void buttonDeleteCategory_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"spDeleteCategory";
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Clear();
+
+                SqlParameter _cid = new SqlParameter("@CatId", SqlDbType.Int);
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                _cid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                myCommand.Parameters.Add(_cid);
+
+                int result = myCommand.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("Category Deleted.");
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
         }
     }
 }
