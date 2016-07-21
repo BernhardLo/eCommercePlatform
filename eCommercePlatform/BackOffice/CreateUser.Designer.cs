@@ -37,7 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxStreet = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxPostalcode = new System.Windows.Forms.TextBox();
+            this.textBoxZIPCode = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -117,16 +117,16 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(111, 245);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Postal Code";
+            this.label5.Text = "ZIP-Code";
             // 
-            // textBoxPostalcode
+            // textBoxZIPCode
             // 
-            this.textBoxPostalcode.Location = new System.Drawing.Point(188, 242);
-            this.textBoxPostalcode.Name = "textBoxPostalcode";
-            this.textBoxPostalcode.Size = new System.Drawing.Size(154, 20);
-            this.textBoxPostalcode.TabIndex = 10;
+            this.textBoxZIPCode.Location = new System.Drawing.Point(188, 242);
+            this.textBoxZIPCode.Name = "textBoxZIPCode";
+            this.textBoxZIPCode.Size = new System.Drawing.Size(154, 20);
+            this.textBoxZIPCode.TabIndex = 10;
             // 
             // label6
             // 
@@ -157,7 +157,6 @@
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(188, 377);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(154, 20);
             this.textBoxPassword.TabIndex = 16;
             // 
@@ -211,7 +210,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxCity);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBoxPostalcode);
+            this.Controls.Add(this.textBoxZIPCode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxStreet);
             this.Controls.Add(this.label3);
@@ -238,7 +237,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxStreet;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxPostalcode;
+        private System.Windows.Forms.TextBox textBoxZIPCode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxCity;
         private System.Windows.Forms.Label label7;
