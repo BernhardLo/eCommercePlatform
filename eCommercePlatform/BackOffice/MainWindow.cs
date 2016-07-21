@@ -13,7 +13,7 @@ namespace BackOffice1
 {
     public partial class MainWindow : Form
     {
-        static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=eCommercePlattform;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=Orders;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         static SqlConnection myConnection = new SqlConnection(conStr);
         static SqlCommand myCommand = new SqlCommand();
 
@@ -62,54 +62,14 @@ namespace BackOffice1
 
         private void ImportCategories ()
         {
-            listBox1.Items.Clear();
-
-            try
-            {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spReadAllCategories";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                SqlDataReader myReader = myCommand.ExecuteReader();
-                listBox1.Items.Add("<all>");
-                listBox1.SetSelected(0, true);
-                while (myReader.Read())
-                {
-                    listBox1.Items.Add($"{myReader[0]}; {myReader[1]}");
-                }
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally
-            {
-                myConnection.Close();
-            }
+            //Todo: SQL Get all category names
+            //and add to listBox1
         }
 
         private void ImportProducts()
         {
-            listBox2.Items.Clear();
-
-            try
-            {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spReadAllProducts";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                SqlDataReader myReader = myCommand.ExecuteReader();
-
-                while (myReader.Read())
-                {
-                    listBox2.Items.Add($"{myReader[0]}; {myReader[1]} - {myReader[2]} - {myReader[4]}");
-                }
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally
-            {
-                myConnection.Close();
-            }
-
+            //Todo: SQL Get all product names
+            //and add to listBox2
         }
 
         private void DisplayUsers ()
@@ -148,34 +108,14 @@ namespace BackOffice1
 
         private void ImportUsers ()
         {
-            listBox1.Items.Clear();
-
-            try
-            {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spReadAllUsers";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                SqlDataReader myReader = myCommand.ExecuteReader();
-                while (myReader.Read())
-                {
-                    listBox1.Items.Add($"{myReader[0]}; {myReader[1]} {myReader[2]}; {myReader[4]}");
-                }
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally
-            {
-                myConnection.Close();
-            }
+            //Todo: SQL get all usernames and
+            //add to listBox1
         }
 
         private void ImportAddresses()
         {
-            listBox2.Items.Clear();
-            listBox4.Items.Clear();
-
-
+            //Todo: SQL get all addresses
+            //registered to the selected user
         }
 
         private void DisplayOrders ()
@@ -214,34 +154,14 @@ namespace BackOffice1
 
         private void ImportOrders ()
         {
-            listBox1.Items.Clear();
-
-            try
-            {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spReadAllOrders";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                SqlDataReader myReader = myCommand.ExecuteReader();
-                while (myReader.Read())
-                {
-                    listBox1.Items.Add($"Order ID: {myReader[0]} - User ID: {myReader[1]}");
-
-                }
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally
-            {
-                myConnection.Close();
-            }
+            //Todo: SQL get all orders and
+            //add to listBox1
         }
 
         private void ImportContents ()
         {
-            listBox2.Items.Clear();
-
-
+            //Todo: SQL get all orderitems
+            //for the selected order
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -317,44 +237,6 @@ namespace BackOffice1
         private void label4_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (menuItemProducts.Checked)
-            {
-                listBox2.Items.Clear();
-                textBoxProductInfo.Clear();
-                listBox2.ClearSelected();
-
-                if (listBox1.SelectedItem.ToString() == "<all>")
-                {
-                    ImportProducts();
-                } else
-                {
-                    int slc = 0;
-                    slc = listBox1.SelectedItem.ToString().IndexOf(";");
-                    string currentIndex = listBox1.SelectedItem.ToString().Substring(0, slc);
-                }
-
-
-            } else if (menuItemUsers.Checked)
-            {
-                listBox2.Items.Clear();
-
-            } else if (menuItemOrders.Checked)
-            {
-                listBox2.Items.Clear();
-            }
-
-
-
-            //listboxAddresses.Items.Clear();
-            //listboxPhones.Items.Clear();
-
-            //int slc = listboxContacts.SelectedItem.ToString().IndexOf(";");
-
-            //string currentIndex = listboxContacts.SelectedItem.ToString().Substring(0, slc);
         }
     }
 }
