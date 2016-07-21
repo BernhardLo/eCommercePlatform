@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLHandler;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace BackOffice1
             this.Hide();
         }
 
-        private bool allFieldsValid ()
+        private bool allFieldsValid()
         {
             bool ret = true;
 
@@ -42,33 +43,22 @@ namespace BackOffice1
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (allFieldsValid())
+            if (
+            SQL.CreateUser(
+                textBoxFirstName.Text,
+                textBoxLastName.Text,
+                textBoxEmail.Text,
+                textBoxUserName.Text,
+                textBoxPassword.Text,
+                textBoxStreet.Text,
+                textBoxPostalcode.Text,
+                textBoxFirstName.Text
+                )
+                == 1)
             {
-                try
-                {
-                    myConnection.Open();
-                    myCommand.Connection = myConnection;
-                    myCommand.CommandText = $"spCreateUser";
-                    myCommand.CommandType = CommandType.StoredProcedure;
-                    myCommand.Parameters.Add("@FirstName", SqlDbType.VarChar).Value = textBoxFirstName.Text;
-                    myCommand.Parameters.Add("@LastName", SqlDbType.VarChar).Value = textBoxLastName.Text;
-                    myCommand.Parameters.Add("@Email", SqlDbType.VarChar).Value = textBoxEmail.Text;
-                    myCommand.Parameters.Add("@Username", SqlDbType.VarChar).Value = textBoxUserName.Text;
-                    myCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = textBoxPassword.Text;
-                    myCommand.Parameters.Add("@Street", SqlDbType.VarChar).Value = textBoxStreet.Text;
-                    myCommand.Parameters.Add("@PostalCode", SqlDbType.VarChar).Value = textBoxPostalcode.Text;
-                    myCommand.Parameters.Add("@City", SqlDbType.VarChar).Value = textBoxFirstName.Text;
-                    myCommand.Parameters.Add("@new_UID", SqlDbType.Int).Direction = ParameterDirection.Output;
 
+            }
 
-                    myCommand.ExecuteNonQuery();
-
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                finally
-                {
-                    myConnection.Close();
-                }
                 this.Hide();
             }
         }
