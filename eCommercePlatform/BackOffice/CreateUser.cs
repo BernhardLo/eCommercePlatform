@@ -33,7 +33,7 @@ namespace BackOffice1
 
             if (string.IsNullOrWhiteSpace(textBoxFirstName.Text))
             {
-
+                ret = false;
             }
 
             return ret;
@@ -41,8 +41,8 @@ namespace BackOffice1
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (
-            SQL.CreateUser(
+
+            if (allFieldsValid() && SQL.CreateUser(
                 textBoxFirstName.Text,
                 textBoxLastName.Text,
                 textBoxEmail.Text,
@@ -54,11 +54,14 @@ namespace BackOffice1
                 )
                 == 1)
             {
-
-            }
-
+                MessageBox.Show("User Created.");
                 this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Input");
             }
         }
     }
 }
+
