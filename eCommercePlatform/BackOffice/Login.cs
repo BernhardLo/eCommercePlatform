@@ -52,9 +52,6 @@ namespace BackOffice1
                 myCommand.Connection = myConnection;
                 myCommand.CommandText = $"select AdminPassword from [Admin] where AdminLogin = '{usr}'";
 
-                // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
-                // string i = myCommand.ExecuteNonQuery().ToString();
-
                 SqlDataReader myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
                 {
