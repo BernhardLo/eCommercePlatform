@@ -36,8 +36,6 @@ namespace BackOffice1
 
             }
 
-
-
             return ret;
         }
 

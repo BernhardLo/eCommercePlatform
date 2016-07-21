@@ -104,7 +104,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="dbconnection.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\contact_us_banner1.jpg" />
     <Content Include="images\Kontor.jpg" />
