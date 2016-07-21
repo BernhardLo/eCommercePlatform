@@ -20,7 +20,7 @@ namespace BackOffice1
         {
             InitializeComponent();
             this.AcceptButton = buttonOk;
-        }
+    }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -42,7 +42,7 @@ namespace BackOffice1
 
         private bool ValidUserAndPassword ()
         {
-            bool ret = false;
+            //bool ret = false;
             string usr = textBoxUserName.Text;
             string pw = textBoxPassword.Text;
 
@@ -50,15 +50,11 @@ namespace BackOffice1
             {
                 myConnection.Open();
                 myCommand.Connection = myConnection;
-//                myCommand.CommandText = $"select AdminPassword from [Admin] where AdminLogin = {usr}";
-                myCommand.CommandText = $"[eCommercePlattform].[dbo].[spReadAllUsers]";
+                myCommand.CommandText = $"select AdminPassword from [dinotest].[eCommercePlattform].[dbo].[Admin] where AdminLogin = {usr}";
 
-                // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
-                string i = myCommand.ExecuteNonQuery().ToString();
-
-                //SqlDataReader myReader = myCommand.ExecuteReader();
-                //if (myReader[2].ToString() == pw)
-                //    ret = true;
+               // myCommand.CommandText = "select LastName from User where FirstName = 'Hans'";
+                SqlDataReader myReader = myCommand.ExecuteReader();
+                MessageBox.Show(myReader.ToString());
 
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -66,7 +62,6 @@ namespace BackOffice1
             {
                 myConnection.Close();
             }
-
             return ret;
         }
     }
