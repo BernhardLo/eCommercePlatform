@@ -63,7 +63,7 @@
             this.labelUserInfo = new System.Windows.Forms.Label();
             this.buttonUpdateCategory2 = new System.Windows.Forms.Button();
             this.buttonCreateCategory2 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelPrice = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -357,18 +357,18 @@
             this.buttonCreateCategory2.UseVisualStyleBackColor = true;
             this.buttonCreateCategory2.Click += new System.EventHandler(this.buttonCreateCategory2_Click_1);
             // 
-            // label5
+            // labelPrice
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(585, 253);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
-            this.label5.TabIndex = 34;
-            this.label5.Text = "Price";
+            this.labelPrice.AutoSize = true;
+            this.labelPrice.Location = new System.Drawing.Point(585, 253);
+            this.labelPrice.Name = "labelPrice";
+            this.labelPrice.Size = new System.Drawing.Size(31, 13);
+            this.labelPrice.TabIndex = 34;
+            this.labelPrice.Text = "Price";
             // 
             // textBoxPrice
             // 
-            this.textBoxPrice.Location = new System.Drawing.Point(585, 272);
+            this.textBoxPrice.Location = new System.Drawing.Point(582, 272);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(100, 20);
             this.textBoxPrice.TabIndex = 33;
@@ -378,7 +378,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.buttonCreateCategory2);
             this.Controls.Add(this.buttonUpdateCategory2);
@@ -451,7 +451,7 @@
         private System.Windows.Forms.Label labelUserInfo;
         private System.Windows.Forms.Button buttonUpdateCategory2;
         private System.Windows.Forms.Button buttonCreateCategory2;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxPrice;
     }
 }

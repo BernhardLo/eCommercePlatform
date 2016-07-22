@@ -42,7 +42,9 @@ namespace BackOffice1
             ImportProducts();
             checkBoxAvailable.Show();
             textBoxQuantity.Show();
+            textBoxPrice.Show();
             labelQuantity.Show();
+            labelPrice.Show();
             textBoxProductInfo.Show();
             labelProductInfo.Show();
 
@@ -130,7 +132,9 @@ namespace BackOffice1
             ImportAddresses();
             checkBoxAvailable.Hide();
             textBoxQuantity.Hide();
+            textBoxPrice.Hide();
             labelQuantity.Hide();
+            labelPrice.Hide();
             textBoxProductInfo.Hide();
             labelProductInfo.Hide();
 
@@ -197,7 +201,9 @@ namespace BackOffice1
             ImportContents();
             checkBoxAvailable.Hide();
             textBoxQuantity.Hide();
+            textBoxPrice.Hide();
             labelQuantity.Hide();
+            labelPrice.Hide();
             textBoxProductInfo.Hide();
             labelProductInfo.Hide();
 
@@ -297,11 +303,47 @@ namespace BackOffice1
 
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
         {
-            //Todo: SQL get Product ID of selected item in listBox2
-            //update that product with text from textBoxProductName.Text and textBoxProductInfo.Text
+            int result = 0;
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"spUpdateProduct";
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Clear();
+                SqlParameter _pid = new SqlParameter("@ProdID", SqlDbType.Int);
+                int slc = listBox2.SelectedItem.ToString().IndexOf(";");
+                _pid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                myCommand.Parameters.Add(_pid);
+                SqlParameter _name = new SqlParameter("@Name", SqlDbType.VarChar);
+                _name.Value = textBox2.Text;
+                myCommand.Parameters.Add(_name);
+                SqlParameter _desc = new SqlParameter("@Desc", SqlDbType.VarChar);
+                _desc.Value = textBoxProductInfo.Text;
+                myCommand.Parameters.Add(_desc);
+                SqlParameter _price = new SqlParameter("@Price", SqlDbType.Money);
+                _price.Value = Convert.ToDecimal(textBoxPrice.Text);
+                myCommand.Parameters.Add(_price);
+                SqlParameter _quantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                _quantity.Value = Convert.ToInt32(textBoxQuantity.Text);
+                myCommand.Parameters.Add(_quantity);
+                SqlParameter _isAvailable = new SqlParameter("@IsAvailable", SqlDbType.Bit);
+                if (checkBoxAvailable.Checked)
+                    _isAvailable.Value = true;
+                else
+                    _isAvailable.Value = false;
+                myCommand.Parameters.Add(_isAvailable);
+                result = myCommand.ExecuteNonQuery();
+                MessageBox.Show(result.ToString());
 
-            //Update Quantity & IsAvailable in Storage using textBoxQuantity.Text & checkBoxAvailable
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
 
+            MessageBox.Show(result.ToString());
             MessageBox.Show("Product Status Updated", "BackOffice",
             MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
@@ -372,6 +414,8 @@ namespace BackOffice1
         {
             textBoxProductInfo.Clear();
             textBoxQuantity.Clear();
+            textBoxPrice.Clear();
+            textBox2.Clear();
             checkBoxAvailable.Checked = false;
 
             if (menuItemProducts.Checked)
@@ -419,6 +463,7 @@ namespace BackOffice1
             {
                 textBoxProductInfo.Clear();
                 textBoxQuantity.Clear();
+                textBoxPrice.Clear();
                 checkBoxAvailable.Checked = false;
 
                 try
@@ -437,6 +482,8 @@ namespace BackOffice1
                     while (myReader.Read())
                     {
                         textBoxProductInfo.Text = myReader[0].ToString() ;
+                        textBoxPrice.Text = myReader[1].ToString();
+                        textBox2.Text = myReader[2].ToString();
                     }
 
                 }
