@@ -56,7 +56,7 @@ namespace BackOffice1
 
             buttonCreateUser.Hide();
             buttonUpdateUser.Hide();
-            buttonDeleteUser.Hide();
+            buttonDeleteUsers.Hide();
 
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
@@ -129,7 +129,8 @@ namespace BackOffice1
             label1.Text = "Users";
             ImportUsers();
             label2.Text = "Addresses";
-            ImportAddresses();
+            textBox2.Clear();
+            listBox2.Items.Clear();
             checkBoxAvailable.Hide();
             textBoxQuantity.Hide();
             textBoxPrice.Hide();
@@ -137,6 +138,8 @@ namespace BackOffice1
             labelPrice.Hide();
             textBoxProductInfo.Hide();
             labelProductInfo.Hide();
+            textBox1.Clear();
+            textBox2.Clear();
 
             buttonCreateCategory2.Hide();
             buttonUpdateCategory2.Hide();
@@ -146,7 +149,7 @@ namespace BackOffice1
 
             buttonCreateUser.Show();
             buttonUpdateUser.Show();
-            buttonDeleteUser.Show();
+            buttonDeleteUsers.Show();
 
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
@@ -215,7 +218,7 @@ namespace BackOffice1
 
             buttonCreateUser.Hide();
             buttonUpdateUser.Hide();
-            buttonDeleteUser.Hide();
+            buttonDeleteUsers.Hide();
 
             buttonSortByValue.Show();
             buttonSortByUser.Show();
@@ -334,18 +337,13 @@ namespace BackOffice1
                     _isAvailable.Value = false;
                 myCommand.Parameters.Add(_isAvailable);
                 result = myCommand.ExecuteNonQuery();
-                MessageBox.Show(result.ToString());
-
+                MessageBox.Show("Product Status Updated");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally
             {
                 myConnection.Close();
             }
-
-            MessageBox.Show(result.ToString());
-            MessageBox.Show("Product Status Updated", "BackOffice",
-            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void buttonCreateUser_Click(object sender, EventArgs e)
@@ -356,7 +354,36 @@ namespace BackOffice1
 
         private void buttonUpdateUser_Click(object sender, EventArgs e)
         {
+            //todo update user
+        }
 
+        private void buttonDeleteUsers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                myConnection.Open();
+                myCommand.Connection = myConnection;
+                myCommand.CommandText = $"spDeleteUser";
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Clear();
+
+                SqlParameter _uid = new SqlParameter("@UserId", SqlDbType.Int);
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                _uid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                myCommand.Parameters.Add(_uid);
+
+                int result = myCommand.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("User Deleted.");
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally
+            {
+                myConnection.Close();
+            }
         }
 
         private void buttonCreateCategory_Click_1(object sender, EventArgs e)
@@ -448,6 +475,30 @@ namespace BackOffice1
             else if (menuItemUsers.Checked)
             {
                 listBox2.Items.Clear();
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spReadAllAddressesFromUser";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _uid = new SqlParameter("@UID", SqlDbType.Int);
+                    int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                    _uid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_uid);
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        listBox2.Items.Add($"{myReader[0]}; {myReader[2]} - {myReader[3]} - {myReader[4]}");
+                    }
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
 
             }
             else if (menuItemOrders.Checked)
@@ -655,6 +706,11 @@ namespace BackOffice1
             {
                 myConnection.Close();
             }
+        }
+
+        private void buttonDeleteUser_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

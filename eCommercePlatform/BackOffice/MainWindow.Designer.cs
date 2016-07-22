@@ -52,7 +52,6 @@
             this.buttonUpdateProduct = new System.Windows.Forms.Button();
             this.buttonAddProduct = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.buttonDeleteUser = new System.Windows.Forms.Button();
             this.buttonUpdateUser = new System.Windows.Forms.Button();
             this.buttonCreateUser = new System.Windows.Forms.Button();
             this.buttonSortByValue = new System.Windows.Forms.Button();
@@ -65,6 +64,7 @@
             this.buttonCreateCategory2 = new System.Windows.Forms.Button();
             this.labelPrice = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.buttonDeleteUsers = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -253,15 +253,6 @@
             this.textBox2.TabIndex = 18;
             this.textBox2.TextChanged += new System.EventHandler(this.textBoxProductName_TextChanged);
             // 
-            // buttonDeleteUser
-            // 
-            this.buttonDeleteUser.Location = new System.Drawing.Point(32, 470);
-            this.buttonDeleteUser.Name = "buttonDeleteUser";
-            this.buttonDeleteUser.Size = new System.Drawing.Size(117, 23);
-            this.buttonDeleteUser.TabIndex = 21;
-            this.buttonDeleteUser.Text = "Delete User";
-            this.buttonDeleteUser.UseVisualStyleBackColor = true;
-            // 
             // buttonUpdateUser
             // 
             this.buttonUpdateUser.Location = new System.Drawing.Point(33, 441);
@@ -293,7 +284,7 @@
             // 
             // buttonSortByNewest
             // 
-            this.buttonSortByNewest.Location = new System.Drawing.Point(32, 470);
+            this.buttonSortByNewest.Location = new System.Drawing.Point(31, 470);
             this.buttonSortByNewest.Name = "buttonSortByNewest";
             this.buttonSortByNewest.Size = new System.Drawing.Size(117, 23);
             this.buttonSortByNewest.TabIndex = 25;
@@ -373,11 +364,22 @@
             this.textBoxPrice.Size = new System.Drawing.Size(100, 20);
             this.textBoxPrice.TabIndex = 33;
             // 
+            // buttonDeleteUsers
+            // 
+            this.buttonDeleteUsers.Location = new System.Drawing.Point(33, 470);
+            this.buttonDeleteUsers.Name = "buttonDeleteUsers";
+            this.buttonDeleteUsers.Size = new System.Drawing.Size(115, 23);
+            this.buttonDeleteUsers.TabIndex = 35;
+            this.buttonDeleteUsers.Text = "Delete User";
+            this.buttonDeleteUsers.UseVisualStyleBackColor = true;
+            this.buttonDeleteUsers.Click += new System.EventHandler(this.buttonDeleteUsers_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.buttonDeleteUsers);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.buttonCreateCategory2);
@@ -389,7 +391,6 @@
             this.Controls.Add(this.buttonSortByNewest);
             this.Controls.Add(this.buttonSortByUser);
             this.Controls.Add(this.buttonCreateUser);
-            this.Controls.Add(this.buttonDeleteUser);
             this.Controls.Add(this.buttonUpdateUser);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.buttonUpdateProduct);
@@ -440,7 +441,6 @@
         private System.Windows.Forms.Button buttonUpdateProduct;
         private System.Windows.Forms.Button buttonAddProduct;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button buttonDeleteUser;
         private System.Windows.Forms.Button buttonUpdateUser;
         private System.Windows.Forms.Button buttonCreateUser;
         private System.Windows.Forms.Button buttonSortByValue;
@@ -453,6 +453,7 @@
         private System.Windows.Forms.Button buttonCreateCategory2;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.Button buttonDeleteUsers;
     }
 }
 
