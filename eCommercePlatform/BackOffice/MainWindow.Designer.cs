@@ -65,6 +65,9 @@
             this.labelPrice = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.buttonDeleteUsers = new System.Windows.Forms.Button();
+            this.buttonEditAdress = new System.Windows.Forms.Button();
+            this.buttonDeleteAdress = new System.Windows.Forms.Button();
+            this.buttonAddAdress = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -374,11 +377,44 @@
             this.buttonDeleteUsers.UseVisualStyleBackColor = true;
             this.buttonDeleteUsers.Click += new System.EventHandler(this.buttonDeleteUsers_Click);
             // 
+            // buttonEditAdress
+            // 
+            this.buttonEditAdress.Location = new System.Drawing.Point(308, 441);
+            this.buttonEditAdress.Name = "buttonEditAdress";
+            this.buttonEditAdress.Size = new System.Drawing.Size(117, 23);
+            this.buttonEditAdress.TabIndex = 36;
+            this.buttonEditAdress.Text = "Edit Adress";
+            this.buttonEditAdress.UseVisualStyleBackColor = true;
+            this.buttonEditAdress.Click += new System.EventHandler(this.buttonEditAdress_Click);
+            // 
+            // buttonDeleteAdress
+            // 
+            this.buttonDeleteAdress.Location = new System.Drawing.Point(308, 470);
+            this.buttonDeleteAdress.Name = "buttonDeleteAdress";
+            this.buttonDeleteAdress.Size = new System.Drawing.Size(117, 23);
+            this.buttonDeleteAdress.TabIndex = 37;
+            this.buttonDeleteAdress.Text = "Delete Adress";
+            this.buttonDeleteAdress.UseVisualStyleBackColor = true;
+            this.buttonDeleteAdress.Click += new System.EventHandler(this.buttonDeleteAdress_Click);
+            // 
+            // buttonAddAdress
+            // 
+            this.buttonAddAdress.Location = new System.Drawing.Point(308, 412);
+            this.buttonAddAdress.Name = "buttonAddAdress";
+            this.buttonAddAdress.Size = new System.Drawing.Size(117, 23);
+            this.buttonAddAdress.TabIndex = 38;
+            this.buttonAddAdress.Text = "Add Adress";
+            this.buttonAddAdress.UseVisualStyleBackColor = true;
+            this.buttonAddAdress.Click += new System.EventHandler(this.buttonAddAdress_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.buttonAddAdress);
+            this.Controls.Add(this.buttonDeleteAdress);
+            this.Controls.Add(this.buttonEditAdress);
             this.Controls.Add(this.buttonDeleteUsers);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.textBoxPrice);
@@ -454,6 +490,9 @@
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.Button buttonDeleteUsers;
+        private System.Windows.Forms.Button buttonEditAdress;
+        private System.Windows.Forms.Button buttonDeleteAdress;
+        private System.Windows.Forms.Button buttonAddAdress;
     }
 }
 

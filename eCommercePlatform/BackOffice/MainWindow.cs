@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +22,7 @@ namespace BackOffice1
         public MainWindow(string usr, bool isAdmin)
         {
             InitializeComponent();
+            menuItemProducts.Checked = true;
             DisplayProducts();
             labelUserInfo.Text = $"Logged in as {usr}";
             if (isAdmin)
@@ -57,14 +59,13 @@ namespace BackOffice1
             buttonCreateUser.Hide();
             buttonUpdateUser.Hide();
             buttonDeleteUsers.Hide();
+            buttonAddAdress.Hide();
+            buttonEditAdress.Hide();
+            buttonDeleteAdress.Hide();
 
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
             buttonSortByNewest.Hide();
-
-            menuItemUsers.Checked = false;
-            menuItemProducts.Checked = true;
-            menuItemOrders.Checked = false;
 
             label4.Hide();
             listBox4.Hide();
@@ -81,16 +82,15 @@ namespace BackOffice1
                 myCommand.CommandText = $"spReadAllCategories";
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Clear();
-                SqlDataReader myReader = myCommand.ExecuteReader();
                 listBox1.Items.Add("<all>");
-                listBox1.SetSelected(0, true);
+                SqlDataReader myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
                 {
                     listBox1.Items.Add($"{myReader[0]}; {myReader[1]}");
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spReadAllCategories: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -116,7 +116,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spReadAllProducts: "+ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -150,13 +150,13 @@ namespace BackOffice1
             buttonCreateUser.Show();
             buttonUpdateUser.Show();
             buttonDeleteUsers.Show();
+            buttonAddAdress.Show();
+            buttonEditAdress.Show();
+            buttonDeleteAdress.Show();
 
             buttonSortByValue.Hide();
             buttonSortByUser.Hide();
             buttonSortByNewest.Hide();
-            menuItemUsers.Checked = true;
-            menuItemProducts.Checked = false;
-            menuItemOrders.Checked = false;
 
             label4.Show();
             label4.Text = "Orders";
@@ -181,7 +181,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spReadAllUsers: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -192,8 +192,6 @@ namespace BackOffice1
         {
             listBox2.Items.Clear();
             listBox4.Items.Clear();
-
-
         }
 
         private void DisplayOrders()
@@ -219,14 +217,13 @@ namespace BackOffice1
             buttonCreateUser.Hide();
             buttonUpdateUser.Hide();
             buttonDeleteUsers.Hide();
+            buttonAddAdress.Hide();
+            buttonEditAdress.Hide();
+            buttonDeleteAdress.Hide();
 
             buttonSortByValue.Show();
             buttonSortByUser.Show();
             buttonSortByNewest.Show();
-
-            menuItemUsers.Checked = false;
-            menuItemProducts.Checked = false;
-            menuItemOrders.Checked = true;
 
             label4.Hide();
             listBox4.Hide();
@@ -251,7 +248,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spReadAllOrders: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -272,17 +269,25 @@ namespace BackOffice1
 
         private void menuItemProducts_Click(object sender, EventArgs e)
         {
+            menuItemProducts.Checked = true;
+            menuItemUsers.Checked = false;
+            menuItemOrders.Checked = false;
             DisplayProducts();
         }
 
         private void menuItemUsers_Click_1(object sender, EventArgs e)
         {
+            menuItemProducts.Checked = false;
+            menuItemUsers.Checked = true;
+            menuItemOrders.Checked = false;
             DisplayUsers();
         }
 
         private void menuItemOrders_Click_1(object sender, EventArgs e)
         {
-
+            menuItemProducts.Checked = false;
+            menuItemUsers.Checked = false;
+            menuItemOrders.Checked = true;
             DisplayOrders();
         }
 
@@ -339,11 +344,13 @@ namespace BackOffice1
                 result = myCommand.ExecuteNonQuery();
                 MessageBox.Show("Product Status Updated");
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spUpdateProduct: " +ex.Message); }
             finally
             {
                 myConnection.Close();
             }
+
+            ImportProducts();
         }
 
         private void buttonCreateUser_Click(object sender, EventArgs e)
@@ -354,7 +361,16 @@ namespace BackOffice1
 
         private void buttonUpdateUser_Click(object sender, EventArgs e)
         {
-            //todo update user
+            if (listBox1.SelectedIndex != -1)
+            {
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                int uid = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                UpdateUser uu = new UpdateUser(uid);
+                uu.Show();
+            } else
+            {
+                MessageBox.Show("No user is selected.");
+            }
         }
 
         private void buttonDeleteUsers_Click(object sender, EventArgs e)
@@ -379,7 +395,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spDeleteUser: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -410,16 +426,11 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spCreateCategory: " +ex.Message); }
             finally
             {
                 myConnection.Close();
             }
-        }
-
-        private void buttonDeleteCategory_Click(object sender, EventArgs e)
-        {
-            //todo delete category
         }
 
         private void textBoxProductName_TextChanged(object sender, EventArgs e)
@@ -445,7 +456,7 @@ namespace BackOffice1
             textBox2.Clear();
             checkBoxAvailable.Checked = false;
 
-            if (menuItemProducts.Checked)
+            if (menuItemProducts.Checked && listBox1.SelectedIndex != -1)
             {
                 listBox2.Items.Clear();
                 textBoxProductInfo.Clear();
@@ -472,7 +483,7 @@ namespace BackOffice1
 
 
             }
-            else if (menuItemUsers.Checked)
+            else if (menuItemUsers.Checked && listBox1.SelectedIndex != -1)
             {
                 listBox2.Items.Clear();
                 try
@@ -494,14 +505,14 @@ namespace BackOffice1
                     }
 
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (Exception ex) { MessageBox.Show("spReadAllAddressesFromUser: " +ex.Message); }
                 finally
                 {
                     myConnection.Close();
                 }
 
             }
-            else if (menuItemOrders.Checked)
+            else if (menuItemOrders.Checked && listBox1.SelectedIndex != -1)
             {
                 listBox2.Items.Clear();
             }
@@ -538,7 +549,7 @@ namespace BackOffice1
                     }
 
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (Exception ex) { MessageBox.Show("spReadProductDescription: " +ex.Message); }
                 finally
                 {
                     myConnection.Close();
@@ -565,7 +576,7 @@ namespace BackOffice1
                     }
 
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                catch (Exception ex) { MessageBox.Show("spReadProductStorage: " +ex.Message); }
                 finally
                 {
                     myConnection.Close();
@@ -603,7 +614,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spReadAllProductsFromCategory: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -640,7 +651,7 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spCreateCategory: " +ex.Message); }
             finally
             {
                 myConnection.Close();
@@ -672,11 +683,13 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spUpdateCategory: " +ex.Message); }
             finally
             {
                 myConnection.Close();
             }
+
+            ImportCategories();
         }
 
         private void buttonDeleteCategory_Click_1(object sender, EventArgs e)
@@ -701,16 +714,78 @@ namespace BackOffice1
                 }
 
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("spDeleteCategory: " +ex.Message); }
             finally
             {
                 myConnection.Close();
             }
         }
 
-        private void buttonDeleteUser_Click_1(object sender, EventArgs e)
+        private void buttonAddAdress_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedIndex != -1)
+            {
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                int userID = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                CreateAdress ca = new CreateAdress(userID);
+                ca.Show();
+            } else
+            {
+                MessageBox.Show("No user selected.");
+            }
 
+        }
+
+        private void buttonEditAdress_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedIndex != -1)
+            {
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                int userID = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                int slc2 = listBox2.SelectedItem.ToString().IndexOf(";");
+                int addressID = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                EditAdress ea = new EditAdress(userID, addressID);
+                ea.Show();
+            }
+            else
+            {
+                MessageBox.Show("No adress selected.");
+            }
+        }
+
+        private void buttonDeleteAdress_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedIndex != -1)
+            {
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spDeleteAddress";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+
+                    SqlParameter _cid = new SqlParameter("@AdrId", SqlDbType.Int);
+                    int slc = listBox2.SelectedItem.ToString().IndexOf(";");
+                    _cid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_cid);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Adress Deleted.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spDeleteAddress: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            } else
+            {
+                MessageBox.Show("No adress selected.");
+            }
         }
     }
 }

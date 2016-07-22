@@ -52,6 +52,12 @@
     <Compile Include="Accounts.Designer.cs">
       <DependentUpon>Accounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateAdress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAdress.Designer.cs">
+      <DependentUpon>CreateAdress.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,12 @@
     </Compile>
     <Compile Include="CreateUser.Designer.cs">
       <DependentUpon>CreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditAdress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditAdress.Designer.cs">
+      <DependentUpon>EditAdress.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -78,14 +90,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateUser.Designer.cs">
+      <DependentUpon>UpdateUser.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Accounts.resx">
       <DependentUpon>Accounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAdress.resx">
+      <DependentUpon>CreateAdress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateProduct.resx">
       <DependentUpon>CreateProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateUser.resx">
       <DependentUpon>CreateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditAdress.resx">
+      <DependentUpon>EditAdress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -102,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UpdateUser.resx">
+      <DependentUpon>UpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
