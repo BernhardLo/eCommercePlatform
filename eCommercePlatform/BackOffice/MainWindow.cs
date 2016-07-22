@@ -370,6 +370,10 @@ namespace BackOffice1
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBoxProductInfo.Clear();
+            textBoxQuantity.Clear();
+            checkBoxAvailable.Checked = false;
+
             if (menuItemProducts.Checked)
             {
                 listBox2.Items.Clear();
@@ -409,6 +413,75 @@ namespace BackOffice1
 
         }
 
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (menuItemProducts.Checked)
+            {
+                textBoxProductInfo.Clear();
+                textBoxQuantity.Clear();
+                checkBoxAvailable.Checked = false;
+
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spReadProductDescription";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _pid = new SqlParameter("@PID", SqlDbType.Int);
+                    int slc = listBox2.SelectedItem.ToString().IndexOf(";");
+                    _pid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_pid);
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        textBoxProductInfo.Text = myReader[0].ToString() ;
+                    }
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spReadProductStorage";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _pid = new SqlParameter("@PID", SqlDbType.Int);
+                    int slc = listBox2.SelectedItem.ToString().IndexOf(";");
+                    _pid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_pid);
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        textBoxQuantity.Text = myReader[0].ToString();
+                        if (myReader[1].ToString() == "True")
+                            checkBoxAvailable.Checked = true;
+                    }
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+
+            } else if (menuItemUsers.Checked)
+            {
+
+            } else if (menuItemOrders.Checked)
+            {
+
+            }
+        }
+
         private void ImportProductsFromCategory(int currentIndex)
         {
             listBox2.Items.Clear();
@@ -441,7 +514,8 @@ namespace BackOffice1
 
         private void buttonAddProduct_Click(object sender, EventArgs e)
         {
-            //todo add product
+            CreateProduct cproduct = new CreateProduct();
+            cproduct.Show();
         }
 
         private void buttonCreateCategory2_Click_1(object sender, EventArgs e)
