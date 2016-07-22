@@ -63,6 +63,8 @@
             this.labelUserInfo = new System.Windows.Forms.Label();
             this.buttonUpdateCategory2 = new System.Windows.Forms.Button();
             this.buttonCreateCategory2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -157,7 +159,7 @@
             // 
             // textBoxQuantity
             // 
-            this.textBoxQuantity.Location = new System.Drawing.Point(582, 283);
+            this.textBoxQuantity.Location = new System.Drawing.Point(582, 314);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(100, 20);
             this.textBoxQuantity.TabIndex = 6;
@@ -165,7 +167,7 @@
             // labelQuantity
             // 
             this.labelQuantity.AutoSize = true;
-            this.labelQuantity.Location = new System.Drawing.Point(582, 264);
+            this.labelQuantity.Location = new System.Drawing.Point(582, 295);
             this.labelQuantity.Name = "labelQuantity";
             this.labelQuantity.Size = new System.Drawing.Size(46, 13);
             this.labelQuantity.TabIndex = 7;
@@ -174,7 +176,7 @@
             // checkBoxAvailable
             // 
             this.checkBoxAvailable.AutoSize = true;
-            this.checkBoxAvailable.Location = new System.Drawing.Point(582, 309);
+            this.checkBoxAvailable.Location = new System.Drawing.Point(582, 340);
             this.checkBoxAvailable.Name = "checkBoxAvailable";
             this.checkBoxAvailable.Size = new System.Drawing.Size(69, 17);
             this.checkBoxAvailable.TabIndex = 8;
@@ -253,7 +255,7 @@
             // 
             // buttonDeleteUser
             // 
-            this.buttonDeleteUser.Location = new System.Drawing.Point(148, 499);
+            this.buttonDeleteUser.Location = new System.Drawing.Point(32, 470);
             this.buttonDeleteUser.Name = "buttonDeleteUser";
             this.buttonDeleteUser.Size = new System.Drawing.Size(117, 23);
             this.buttonDeleteUser.TabIndex = 21;
@@ -291,7 +293,7 @@
             // 
             // buttonSortByNewest
             // 
-            this.buttonSortByNewest.Location = new System.Drawing.Point(156, 441);
+            this.buttonSortByNewest.Location = new System.Drawing.Point(32, 470);
             this.buttonSortByNewest.Name = "buttonSortByNewest";
             this.buttonSortByNewest.Size = new System.Drawing.Size(117, 23);
             this.buttonSortByNewest.TabIndex = 25;
@@ -337,7 +339,7 @@
             // 
             // buttonUpdateCategory2
             // 
-            this.buttonUpdateCategory2.Location = new System.Drawing.Point(34, 441);
+            this.buttonUpdateCategory2.Location = new System.Drawing.Point(33, 441);
             this.buttonUpdateCategory2.Name = "buttonUpdateCategory2";
             this.buttonUpdateCategory2.Size = new System.Drawing.Size(116, 23);
             this.buttonUpdateCategory2.TabIndex = 31;
@@ -355,11 +357,29 @@
             this.buttonCreateCategory2.UseVisualStyleBackColor = true;
             this.buttonCreateCategory2.Click += new System.EventHandler(this.buttonCreateCategory2_Click_1);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(585, 253);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Price";
+            // 
+            // textBoxPrice
+            // 
+            this.textBoxPrice.Location = new System.Drawing.Point(585, 272);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPrice.TabIndex = 33;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.buttonCreateCategory2);
             this.Controls.Add(this.buttonUpdateCategory2);
             this.Controls.Add(this.labelUserInfo);
@@ -431,6 +451,8 @@
         private System.Windows.Forms.Label labelUserInfo;
         private System.Windows.Forms.Button buttonUpdateCategory2;
         private System.Windows.Forms.Button buttonCreateCategory2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxPrice;
     }
 }
 
