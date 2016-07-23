@@ -13,6 +13,36 @@ namespace SQLHandler
         const string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=eCommercePlattform;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         static SqlConnection connection = new SqlConnection(conStr);
 
+        public static bool CheckLogin(string username, string password)
+        {
+            bool ret = false;
+
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandText = $"select [Password] from [User] where Username = {username}";
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                    if (password.Equals(reader["Password"].ToString()))
+                        ret = true;
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return ret;
+        }
+
         public static int CreateUser(string firstname, string lastname, string email, string username, string password, string street, string zip, string city)
         {
             int newID = 0;

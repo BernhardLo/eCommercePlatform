@@ -32,18 +32,7 @@
                             <li><a href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Tools</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a data-toggle="modal" href="/Index.aspx#signupModal">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    &nbsp;&nbsp;Sign Up
-                                </a>
-                            </li>
-                            <li>
-                                <a data-toggle="modal" href="/Index.aspx#loginModal">
-                                    <span class="glyphicon glyphicon-log-in"></span>
-                                    &nbsp;&nbsp;Login
-                                </a>
-                            </li>
+                            <asp:Literal ID="rightnav" runat="server"></asp:Literal>
                             <li>
                                 <a href="/Pages/Cart.aspx">
                                     <span class="glyphicon glyphicon-shopping-cart"></span>
