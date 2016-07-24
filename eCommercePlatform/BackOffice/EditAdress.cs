@@ -53,48 +53,67 @@ namespace BackOffice1
         private void buttonOK_Click(object sender, EventArgs e)
         {
             int result = 0;
-            try
+            if (!String.IsNullOrWhiteSpace(textBoxStreet.Text) && IsInt(textBoxPostalcode.Text) && !String.IsNullOrWhiteSpace(textBoxCity.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spUpdateAddress";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spUpdateAddress";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
 
-                SqlParameter _aid = new SqlParameter("@AID", SqlDbType.Int);
-                _aid.Value = addressID;
-                myCommand.Parameters.Add(_aid);
+                    SqlParameter _aid = new SqlParameter("@AID", SqlDbType.Int);
+                    _aid.Value = addressID;
+                    myCommand.Parameters.Add(_aid);
 
-                SqlParameter _uid = new SqlParameter("@UserID", SqlDbType.Int);
-                _uid.Value = userID;
-                myCommand.Parameters.Add(_uid);
+                    SqlParameter _uid = new SqlParameter("@UserID", SqlDbType.Int);
+                    _uid.Value = userID;
+                    myCommand.Parameters.Add(_uid);
 
-                SqlParameter _street = new SqlParameter("@Street", SqlDbType.VarChar);
-                _street.Value = textBoxStreet.Text;
-                myCommand.Parameters.Add(_street);
+                    SqlParameter _street = new SqlParameter("@Street", SqlDbType.VarChar);
+                    _street.Value = textBoxStreet.Text;
+                    myCommand.Parameters.Add(_street);
 
-                SqlParameter _postalcode = new SqlParameter("@PostalCode", SqlDbType.VarChar);
-                _postalcode.Value = textBoxPostalcode.Text;
-                myCommand.Parameters.Add(_postalcode);
+                    SqlParameter _postalcode = new SqlParameter("@PostalCode", SqlDbType.VarChar);
+                    _postalcode.Value = textBoxPostalcode.Text;
+                    myCommand.Parameters.Add(_postalcode);
 
-                SqlParameter _city = new SqlParameter("@City", SqlDbType.VarChar);
-                _city.Value = textBoxCity.Text;
-                myCommand.Parameters.Add(_city);
+                    SqlParameter _city = new SqlParameter("@City", SqlDbType.VarChar);
+                    _city.Value = textBoxCity.Text;
+                    myCommand.Parameters.Add(_city);
 
-                result = myCommand.ExecuteNonQuery();
-                MessageBox.Show("Adress Updated");
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-            finally
+                    result = myCommand.ExecuteNonQuery();
+                    MessageBox.Show("Adress Updated");
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+                this.Hide();
+            }else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
-            this.Hide();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private bool IsInt(string input)
+        {
+            int num = 0;
+            if (int.TryParse(input, out num))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

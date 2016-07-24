@@ -54,9 +54,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonUpdateUser = new System.Windows.Forms.Button();
             this.buttonCreateUser = new System.Windows.Forms.Button();
-            this.buttonSortByValue = new System.Windows.Forms.Button();
-            this.buttonSortByNewest = new System.Windows.Forms.Button();
-            this.buttonSortByUser = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.labelUserInfo = new System.Windows.Forms.Label();
@@ -68,6 +65,9 @@
             this.buttonEditAdress = new System.Windows.Forms.Button();
             this.buttonDeleteAdress = new System.Windows.Forms.Button();
             this.buttonAddAdress = new System.Windows.Forms.Button();
+            this.buttonCreateOrder = new System.Windows.Forms.Button();
+            this.buttonDeleteOrder = new System.Windows.Forms.Button();
+            this.buttonAddItem = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -276,33 +276,6 @@
             this.buttonCreateUser.UseVisualStyleBackColor = true;
             this.buttonCreateUser.Click += new System.EventHandler(this.buttonCreateUser_Click);
             // 
-            // buttonSortByValue
-            // 
-            this.buttonSortByValue.Location = new System.Drawing.Point(34, 409);
-            this.buttonSortByValue.Name = "buttonSortByValue";
-            this.buttonSortByValue.Size = new System.Drawing.Size(117, 23);
-            this.buttonSortByValue.TabIndex = 26;
-            this.buttonSortByValue.Text = "Sort By Value";
-            this.buttonSortByValue.UseVisualStyleBackColor = true;
-            // 
-            // buttonSortByNewest
-            // 
-            this.buttonSortByNewest.Location = new System.Drawing.Point(31, 470);
-            this.buttonSortByNewest.Name = "buttonSortByNewest";
-            this.buttonSortByNewest.Size = new System.Drawing.Size(117, 23);
-            this.buttonSortByNewest.TabIndex = 25;
-            this.buttonSortByNewest.Text = "Sort By Newest";
-            this.buttonSortByNewest.UseVisualStyleBackColor = true;
-            // 
-            // buttonSortByUser
-            // 
-            this.buttonSortByUser.Location = new System.Drawing.Point(33, 441);
-            this.buttonSortByUser.Name = "buttonSortByUser";
-            this.buttonSortByUser.Size = new System.Drawing.Size(117, 23);
-            this.buttonSortByUser.TabIndex = 24;
-            this.buttonSortByUser.Text = "Sort By User";
-            this.buttonSortByUser.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -407,11 +380,44 @@
             this.buttonAddAdress.UseVisualStyleBackColor = true;
             this.buttonAddAdress.Click += new System.EventHandler(this.buttonAddAdress_Click);
             // 
+            // buttonCreateOrder
+            // 
+            this.buttonCreateOrder.Location = new System.Drawing.Point(34, 409);
+            this.buttonCreateOrder.Name = "buttonCreateOrder";
+            this.buttonCreateOrder.Size = new System.Drawing.Size(115, 23);
+            this.buttonCreateOrder.TabIndex = 39;
+            this.buttonCreateOrder.Text = "Create Order";
+            this.buttonCreateOrder.UseVisualStyleBackColor = true;
+            this.buttonCreateOrder.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonDeleteOrder
+            // 
+            this.buttonDeleteOrder.Location = new System.Drawing.Point(33, 441);
+            this.buttonDeleteOrder.Name = "buttonDeleteOrder";
+            this.buttonDeleteOrder.Size = new System.Drawing.Size(115, 23);
+            this.buttonDeleteOrder.TabIndex = 40;
+            this.buttonDeleteOrder.Text = "Delete Order";
+            this.buttonDeleteOrder.UseVisualStyleBackColor = true;
+            this.buttonDeleteOrder.Click += new System.EventHandler(this.buttonDeleteOrder_Click);
+            // 
+            // buttonAddItem
+            // 
+            this.buttonAddItem.Location = new System.Drawing.Point(308, 412);
+            this.buttonAddItem.Name = "buttonAddItem";
+            this.buttonAddItem.Size = new System.Drawing.Size(115, 23);
+            this.buttonAddItem.TabIndex = 41;
+            this.buttonAddItem.Text = "Add Item(s)";
+            this.buttonAddItem.UseVisualStyleBackColor = true;
+            this.buttonAddItem.Click += new System.EventHandler(this.buttonAddItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 526);
+            this.Controls.Add(this.buttonAddItem);
+            this.Controls.Add(this.buttonDeleteOrder);
+            this.Controls.Add(this.buttonCreateOrder);
             this.Controls.Add(this.buttonAddAdress);
             this.Controls.Add(this.buttonDeleteAdress);
             this.Controls.Add(this.buttonEditAdress);
@@ -423,9 +429,6 @@
             this.Controls.Add(this.labelUserInfo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox4);
-            this.Controls.Add(this.buttonSortByValue);
-            this.Controls.Add(this.buttonSortByNewest);
-            this.Controls.Add(this.buttonSortByUser);
             this.Controls.Add(this.buttonCreateUser);
             this.Controls.Add(this.buttonUpdateUser);
             this.Controls.Add(this.textBox2);
@@ -479,9 +482,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button buttonUpdateUser;
         private System.Windows.Forms.Button buttonCreateUser;
-        private System.Windows.Forms.Button buttonSortByValue;
-        private System.Windows.Forms.Button buttonSortByNewest;
-        private System.Windows.Forms.Button buttonSortByUser;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox4;
         private System.Windows.Forms.Label labelUserInfo;
@@ -493,6 +493,9 @@
         private System.Windows.Forms.Button buttonEditAdress;
         private System.Windows.Forms.Button buttonDeleteAdress;
         private System.Windows.Forms.Button buttonAddAdress;
+        private System.Windows.Forms.Button buttonCreateOrder;
+        private System.Windows.Forms.Button buttonDeleteOrder;
+        private System.Windows.Forms.Button buttonAddItem;
     }
 }
 

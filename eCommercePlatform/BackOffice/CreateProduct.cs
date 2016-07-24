@@ -44,64 +44,70 @@ namespace BackOffice1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBoxName.Text) && !String.IsNullOrWhiteSpace(textBox4.Text) && IsInt(textBoxPrice.Text) && IsInt(textBoxQuantity.Text))
             {
-                myConnection.Open();
-
-                myCommand.Connection = myConnection;
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-                myCommand.CommandText = "spCreateProduct";
-
-                SqlParameter _name = new SqlParameter("@Name", SqlDbType.VarChar);
-                _name.Value = textBoxName.Text;
-                myCommand.Parameters.Add(_name);
-
-                SqlParameter _catid = new SqlParameter("@CatID", SqlDbType.Int);
-                int slc = comboBoxCategory.SelectedItem.ToString().IndexOf(";");
-                _catid.Value = Convert.ToInt32(comboBoxCategory.SelectedItem.ToString().Substring(0, slc));
-                myCommand.Parameters.Add(_catid);
-
-                SqlParameter _desc = new SqlParameter("@Desc", SqlDbType.VarChar);
-                _desc.Value = textBox4.Text;
-                myCommand.Parameters.Add(_desc);
-
-                SqlParameter _price = new SqlParameter("@Price", SqlDbType.Money);
-                _price.Value = textBoxPrice.Text;
-                myCommand.Parameters.Add(_price);
-
-                SqlParameter _quantity = new SqlParameter("@Quantity", SqlDbType.Int);
-                _quantity.Value = textBoxQuantity.Text;
-                myCommand.Parameters.Add(_quantity);
-
-                SqlParameter _isAvailable = new SqlParameter("@IsAvailable", SqlDbType.Bit);
-                if (checkBoxIsAvailable.Checked)
+                try
                 {
-                    _isAvailable.Value = "True";
-                } else
-                {
-                    _isAvailable.Value = "False";
+                    myConnection.Open();
+
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    myCommand.CommandText = "spCreateProduct";
+
+                    SqlParameter _name = new SqlParameter("@Name", SqlDbType.VarChar);
+                    _name.Value = textBoxName.Text;
+                    myCommand.Parameters.Add(_name);
+
+                    SqlParameter _catid = new SqlParameter("@CatID", SqlDbType.Int);
+                    int slc = comboBoxCategory.SelectedItem.ToString().IndexOf(";");
+                    _catid.Value = Convert.ToInt32(comboBoxCategory.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_catid);
+
+                    SqlParameter _desc = new SqlParameter("@Desc", SqlDbType.VarChar);
+                    _desc.Value = textBox4.Text;
+                    myCommand.Parameters.Add(_desc);
+
+                    SqlParameter _price = new SqlParameter("@Price", SqlDbType.Money);
+                    _price.Value = textBoxPrice.Text;
+                    myCommand.Parameters.Add(_price);
+
+                    SqlParameter _quantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                    _quantity.Value = textBoxQuantity.Text;
+                    myCommand.Parameters.Add(_quantity);
+
+                    SqlParameter _isAvailable = new SqlParameter("@IsAvailable", SqlDbType.Bit);
+                    if (checkBoxIsAvailable.Checked)
+                    {
+                        _isAvailable.Value = "True";
+                    }
+                    else
+                    {
+                        _isAvailable.Value = "False";
+                    }
+                    myCommand.Parameters.Add(_isAvailable);
+
+                    SqlParameter _newId = new SqlParameter("@new_ProdId", SqlDbType.Int);
+                    _newId.Direction = ParameterDirection.Output;
+                    myCommand.Parameters.Add(_newId);
+
+                    int result = myCommand.ExecuteNonQuery();
                 }
-                myCommand.Parameters.Add(_isAvailable);
+                catch (Exception)
+                {
 
-                SqlParameter _newId = new SqlParameter("@new_ProdId", SqlDbType.Int);
-                _newId.Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add(_newId);
+                }
+                finally
+                {
+                    myConnection.Close();
+                }
 
-                int result = myCommand.ExecuteNonQuery();
-                MessageBox.Show(result.ToString());
-            }
-            catch (Exception)
+                MessageBox.Show("Product Created.");
+                this.Hide();
+            } else
             {
-
+                MessageBox.Show("Invalid Input");
             }
-            finally
-            {
-                myConnection.Close();
-            }
-
-            MessageBox.Show("Product Created.");
-            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -109,12 +115,17 @@ namespace BackOffice1
             this.Hide();
         }
 
-        //@Name varchar(MAX),
-        //@CatID int,
-        //@Desc varchar(MAX),
-        //@Price money,
-        //@Quantity int,
-        //@IsAvailable bit,
-        //@new_ProdId int output
+        private bool IsInt(string input)
+        {
+            int num = 0;
+            if (int.TryParse(input, out num))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

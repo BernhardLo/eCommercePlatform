@@ -31,7 +31,9 @@ namespace BackOffice1
         {
             bool ret = true;
 
-            if (string.IsNullOrWhiteSpace(textBoxFirstName.Text))
+            if (string.IsNullOrWhiteSpace(textBoxFirstName.Text) || string.IsNullOrWhiteSpace(textBoxLastName.Text) || string.IsNullOrWhiteSpace(textBoxEmail.Text) ||
+                string.IsNullOrWhiteSpace(textBoxUserName.Text) || string.IsNullOrWhiteSpace(textBoxPassword.Text) || string.IsNullOrWhiteSpace(textBoxStreet.Text) ||
+                !IsInt(textBoxPostalcode.Text) || string.IsNullOrWhiteSpace(textBoxCity.Text) )
             {
                 ret = false;
             }
@@ -50,7 +52,7 @@ namespace BackOffice1
                 textBoxPassword.Text,
                 textBoxStreet.Text,
                 textBoxPostalcode.Text,
-                textBoxFirstName.Text
+                textBoxCity.Text
                 )
                 == 1)
             {
@@ -60,6 +62,18 @@ namespace BackOffice1
             else
             {
                 MessageBox.Show("Invalid Input");
+            }
+        }
+        private bool IsInt(string input)
+        {
+            int num = 0;
+            if (int.TryParse(input, out num))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
