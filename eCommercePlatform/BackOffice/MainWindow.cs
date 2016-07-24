@@ -63,9 +63,9 @@ namespace BackOffice1
             buttonEditAdress.Hide();
             buttonDeleteAdress.Hide();
 
-            buttonSortByValue.Hide();
-            buttonSortByUser.Hide();
-            buttonSortByNewest.Hide();
+            buttonCreateOrder.Hide();
+            buttonDeleteOrder.Hide();
+            buttonAddItem.Hide();
 
             label4.Hide();
             listBox4.Hide();
@@ -154,9 +154,9 @@ namespace BackOffice1
             buttonEditAdress.Show();
             buttonDeleteAdress.Show();
 
-            buttonSortByValue.Hide();
-            buttonSortByUser.Hide();
-            buttonSortByNewest.Hide();
+            buttonCreateOrder.Hide();
+            buttonDeleteOrder.Hide();
+            buttonAddItem.Hide();
 
             label4.Show();
             label4.Text = "Orders";
@@ -221,9 +221,9 @@ namespace BackOffice1
             buttonEditAdress.Hide();
             buttonDeleteAdress.Hide();
 
-            buttonSortByValue.Show();
-            buttonSortByUser.Show();
-            buttonSortByNewest.Show();
+            buttonCreateOrder.Show();
+            buttonDeleteOrder.Show();
+            buttonAddItem.Show();
 
             label4.Hide();
             listBox4.Hide();
@@ -243,7 +243,7 @@ namespace BackOffice1
                 SqlDataReader myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
                 {
-                    listBox1.Items.Add($"Order ID: {myReader[0]} - User ID: {myReader[1]}");
+                    listBox1.Items.Add($"{myReader[0]}; - User ID: {myReader[1]}");
 
                 }
 
@@ -511,10 +511,60 @@ namespace BackOffice1
                     myConnection.Close();
                 }
 
+                listBox4.Items.Clear();
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spReadAllOrdersFromUser";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _uid = new SqlParameter("@UID", SqlDbType.Int);
+                    int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                    _uid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_uid);
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        listBox4.Items.Add($"{myReader[0]}; {myReader[2]}");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spReadAllAddressesFromUser: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+
             }
             else if (menuItemOrders.Checked && listBox1.SelectedIndex != -1)
             {
                 listBox2.Items.Clear();
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spReadAllItemsFromOrder";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _uid = new SqlParameter("@OID", SqlDbType.Int);
+                    int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                    _uid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_uid);
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        listBox2.Items.Add($"Product Id: {myReader[0]}; Quantity: {myReader[2]}");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spReadAllItemsFromOrder: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
             }
 
         }
@@ -785,6 +835,59 @@ namespace BackOffice1
             } else
             {
                 MessageBox.Show("No adress selected.");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateOrder co = new CreateOrder();
+            co.Show();
+        }
+
+        private void buttonDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spDeleteOrder";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+
+                    SqlParameter _oid = new SqlParameter("@OrderId", SqlDbType.Int);
+                    int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                    _oid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_oid);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result > 1)
+                    {
+                        MessageBox.Show("Order Deleted.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spDeleteOrder: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No order selected.");
+            }
+        }
+
+        private void buttonAddItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                int orderId = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                AddItem ai = new AddItem(orderId);
+                ai.Show();
             }
         }
     }
