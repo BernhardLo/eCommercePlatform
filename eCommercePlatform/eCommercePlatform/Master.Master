@@ -26,10 +26,10 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Books</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Electronics</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;Supplies</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Tools</a></li>
+                            <li><a href="/Index.aspx?category=books"><span class="glyphicon glyphicon-book"></span>&nbsp;&nbsp;Books</a></li>
+                            <li><a href="/Index.aspx?category=electronics"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Electronics</a></li>
+                            <li><a href="/Index.aspx?category=supplies"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;Supplies</a></li>
+                            <li><a href="/Index.aspx?category=tools"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Tools</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <asp:Literal ID="rightnav" runat="server"></asp:Literal>

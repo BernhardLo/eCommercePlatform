@@ -243,5 +243,40 @@ namespace SQLHandler
             return newID;
         }
 
+        public static Dictionary<string, List<string>> LoadProducts(string category)
+        {
+            Dictionary<string, List<string>> products = new Dictionary<string, List<string>>();
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandText = $"select * from category as c left outer join product as p on c.id = p.category where c.title = '{category}'";
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    List<string> temp = new List<string>();
+                    
+                    temp.Add(reader["Price"].ToString());
+                    temp.Add(reader["Description"].ToString());
+
+                    products.Add(reader["Name"].ToString(), temp);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return products;
+        }
     }
 }
