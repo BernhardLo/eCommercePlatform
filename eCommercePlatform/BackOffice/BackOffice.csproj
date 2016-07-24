@@ -58,6 +58,12 @@
     <Compile Include="AddItem.Designer.cs">
       <DependentUpon>AddItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAdmin.Designer.cs">
+      <DependentUpon>CreateAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateAdress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddItem.resx">
       <DependentUpon>AddItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAdmin.resx">
+      <DependentUpon>CreateAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateAdress.resx">
       <DependentUpon>CreateAdress.cs</DependentUpon>

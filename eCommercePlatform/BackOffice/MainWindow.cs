@@ -17,7 +17,6 @@ namespace BackOffice1
         static string conStr = "Server=tcp:dinotest.database.windows.net,1433;Data Source=dinotest.database.windows.net;Initial Catalog=eCommercePlattform;Persist Security Info=False;User ID=dino;Password=HJOhjo1991;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         static SqlConnection myConnection = new SqlConnection(conStr);
         static SqlCommand myCommand = new SqlCommand();
-        bool masterAdmin = false;
 
         public MainWindow(string usr, bool isAdmin)
         {
@@ -25,15 +24,6 @@ namespace BackOffice1
             menuItemProducts.Checked = true;
             DisplayProducts();
             labelUserInfo.Text = $"Logged in as {usr}";
-            if (isAdmin)
-            {
-                labelUserInfo.Text += " (Admin)";
-                masterAdmin = true;
-            }
-            else
-            {
-                menuItemManage.Enabled = false;
-            }
         }
 
         private void DisplayProducts()
