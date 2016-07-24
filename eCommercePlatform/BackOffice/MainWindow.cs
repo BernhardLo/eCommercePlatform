@@ -302,42 +302,48 @@ namespace BackOffice1
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
         {
             int result = 0;
-            try
+            if (!String.IsNullOrWhiteSpace(textBox2.Text) && !String.IsNullOrWhiteSpace(textBoxProductInfo.Text) && IsInt(textBoxPrice.Text) && IsInt(textBoxQuantity.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spUpdateProduct";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-                SqlParameter _pid = new SqlParameter("@ProdID", SqlDbType.Int);
-                int slc = listBox2.SelectedItem.ToString().IndexOf(";");
-                _pid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
-                myCommand.Parameters.Add(_pid);
-                SqlParameter _name = new SqlParameter("@Name", SqlDbType.VarChar);
-                _name.Value = textBox2.Text;
-                myCommand.Parameters.Add(_name);
-                SqlParameter _desc = new SqlParameter("@Desc", SqlDbType.VarChar);
-                _desc.Value = textBoxProductInfo.Text;
-                myCommand.Parameters.Add(_desc);
-                SqlParameter _price = new SqlParameter("@Price", SqlDbType.Money);
-                _price.Value = Convert.ToDecimal(textBoxPrice.Text);
-                myCommand.Parameters.Add(_price);
-                SqlParameter _quantity = new SqlParameter("@Quantity", SqlDbType.Int);
-                _quantity.Value = Convert.ToInt32(textBoxQuantity.Text);
-                myCommand.Parameters.Add(_quantity);
-                SqlParameter _isAvailable = new SqlParameter("@IsAvailable", SqlDbType.Bit);
-                if (checkBoxAvailable.Checked)
-                    _isAvailable.Value = true;
-                else
-                    _isAvailable.Value = false;
-                myCommand.Parameters.Add(_isAvailable);
-                result = myCommand.ExecuteNonQuery();
-                MessageBox.Show("Product Status Updated");
-            }
-            catch (Exception ex) { MessageBox.Show("spUpdateProduct: " +ex.Message); }
-            finally
+                try
+                {
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spUpdateProduct";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+                    SqlParameter _pid = new SqlParameter("@ProdID", SqlDbType.Int);
+                    int slc = listBox2.SelectedItem.ToString().IndexOf(";");
+                    _pid.Value = Convert.ToInt32(listBox2.SelectedItem.ToString().Substring(0, slc));
+                    myCommand.Parameters.Add(_pid);
+                    SqlParameter _name = new SqlParameter("@Name", SqlDbType.VarChar);
+                    _name.Value = textBox2.Text;
+                    myCommand.Parameters.Add(_name);
+                    SqlParameter _desc = new SqlParameter("@Desc", SqlDbType.VarChar);
+                    _desc.Value = textBoxProductInfo.Text;
+                    myCommand.Parameters.Add(_desc);
+                    SqlParameter _price = new SqlParameter("@Price", SqlDbType.Money);
+                    _price.Value = Convert.ToDecimal(textBoxPrice.Text);
+                    myCommand.Parameters.Add(_price);
+                    SqlParameter _quantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                    _quantity.Value = Convert.ToInt32(textBoxQuantity.Text);
+                    myCommand.Parameters.Add(_quantity);
+                    SqlParameter _isAvailable = new SqlParameter("@IsAvailable", SqlDbType.Bit);
+                    if (checkBoxAvailable.Checked)
+                        _isAvailable.Value = true;
+                    else
+                        _isAvailable.Value = false;
+                    myCommand.Parameters.Add(_isAvailable);
+                    result = myCommand.ExecuteNonQuery();
+                    MessageBox.Show("Product Status Updated");
+                }
+                catch (Exception ex) { MessageBox.Show("spUpdateProduct: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
 
             ImportProducts();
@@ -394,32 +400,38 @@ namespace BackOffice1
 
         private void buttonCreateCategory_Click_1(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spCreateCategory";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _new_cid = new SqlParameter("@new_CatId", SqlDbType.Int);
-                _new_cid.Direction = ParameterDirection.Output;
-                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
-                _title.Value = textBox1.Text;
-                myCommand.Parameters.Add(_new_cid);
-                myCommand.Parameters.Add(_title);
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
+                try
                 {
-                    MessageBox.Show("Category Created.");
-                }
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spCreateCategory";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
 
-            }
-            catch (Exception ex) { MessageBox.Show("spCreateCategory: " +ex.Message); }
-            finally
+                    SqlParameter _new_cid = new SqlParameter("@new_CatId", SqlDbType.Int);
+                    _new_cid.Direction = ParameterDirection.Output;
+                    SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
+                    _title.Value = textBox1.Text;
+                    myCommand.Parameters.Add(_new_cid);
+                    myCommand.Parameters.Add(_title);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Category Created.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spCreateCategory: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
         }
 
@@ -669,64 +681,76 @@ namespace BackOffice1
 
         private void buttonCreateCategory2_Click_1(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spCreateCategory";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _new_cid = new SqlParameter("@new_CatId", SqlDbType.Int);
-                _new_cid.Direction = ParameterDirection.Output;
-                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
-                _title.Value = textBox1.Text;
-                myCommand.Parameters.Add(_new_cid);
-                myCommand.Parameters.Add(_title);
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
+                try
                 {
-                    MessageBox.Show("Category Created.");
-                }
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spCreateCategory";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
 
-            }
-            catch (Exception ex) { MessageBox.Show("spCreateCategory: " +ex.Message); }
-            finally
+                    SqlParameter _new_cid = new SqlParameter("@new_CatId", SqlDbType.Int);
+                    _new_cid.Direction = ParameterDirection.Output;
+                    SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
+                    _title.Value = textBox1.Text;
+                    myCommand.Parameters.Add(_new_cid);
+                    myCommand.Parameters.Add(_title);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Category Created.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spCreateCategory: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
         }
 
         private void buttonUpdateCategory2_Click(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spUpdateCategory";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _cid = new SqlParameter("@CatId", SqlDbType.Int);
-                int slc = listBox1.SelectedItem.ToString().IndexOf(";");
-                _cid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
-                SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
-                _title.Value = textBox1.Text;
-                myCommand.Parameters.Add(_cid);
-                myCommand.Parameters.Add(_title);
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
+                try
                 {
-                    MessageBox.Show("Category Updated.");
-                }
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spUpdateCategory";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
 
-            }
-            catch (Exception ex) { MessageBox.Show("spUpdateCategory: " +ex.Message); }
-            finally
+                    SqlParameter _cid = new SqlParameter("@CatId", SqlDbType.Int);
+                    int slc = listBox1.SelectedItem.ToString().IndexOf(";");
+                    _cid.Value = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
+                    SqlParameter _title = new SqlParameter("@Title", SqlDbType.VarChar);
+                    _title.Value = textBox1.Text;
+                    myCommand.Parameters.Add(_cid);
+                    myCommand.Parameters.Add(_title);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Category Updated.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spUpdateCategory: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
 
             ImportCategories();
@@ -878,6 +902,19 @@ namespace BackOffice1
                 int orderId = Convert.ToInt32(listBox1.SelectedItem.ToString().Substring(0, slc));
                 AddItem ai = new AddItem(orderId);
                 ai.Show();
+            }
+        }
+
+        private bool IsInt(string input)
+        {
+            int num = 0;
+            if (int.TryParse(input, out num))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

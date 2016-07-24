@@ -25,51 +25,69 @@ namespace BackOffice1
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBoxStreet.Text) && IsInt(textBoxPostalcode.Text) && !String.IsNullOrWhiteSpace(textBoxCity.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spCreateAddress";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _new_aid = new SqlParameter("@new_AID", SqlDbType.Int);
-                _new_aid.Direction = ParameterDirection.Output;
-                SqlParameter _userID = new SqlParameter("@UserId", SqlDbType.Int);
-                _userID.Value = userID;
-                SqlParameter _street = new SqlParameter("@Street", SqlDbType.VarChar);
-                _street.Value = textBoxStreet.Text;
-                SqlParameter _postalcode = new SqlParameter("@PostalCode", SqlDbType.VarChar);
-                _postalcode.Value = textBoxPostalcode.Text;
-                SqlParameter _city = new SqlParameter("@City", SqlDbType.VarChar);
-                _city.Value = textBoxCity.Text;
-
-                myCommand.Parameters.Add(_new_aid);
-                myCommand.Parameters.Add(_userID);
-                myCommand.Parameters.Add(_street);
-                myCommand.Parameters.Add(_postalcode);
-                myCommand.Parameters.Add(_city);
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
+                try
                 {
-                    MessageBox.Show("Adress Created.");
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spCreateAddress";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
+
+                    SqlParameter _new_aid = new SqlParameter("@new_AID", SqlDbType.Int);
+                    _new_aid.Direction = ParameterDirection.Output;
+                    SqlParameter _userID = new SqlParameter("@UserId", SqlDbType.Int);
+                    _userID.Value = userID;
+                    SqlParameter _street = new SqlParameter("@Street", SqlDbType.VarChar);
+                    _street.Value = textBoxStreet.Text;
+                    SqlParameter _postalcode = new SqlParameter("@PostalCode", SqlDbType.VarChar);
+                    _postalcode.Value = textBoxPostalcode.Text;
+                    SqlParameter _city = new SqlParameter("@City", SqlDbType.VarChar);
+                    _city.Value = textBoxCity.Text;
+
+                    myCommand.Parameters.Add(_new_aid);
+                    myCommand.Parameters.Add(_userID);
+                    myCommand.Parameters.Add(_street);
+                    myCommand.Parameters.Add(_postalcode);
+                    myCommand.Parameters.Add(_city);
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Adress Created.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spCreateAddress: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
                 }
 
-            }
-            catch (Exception ex) { MessageBox.Show("spCreateAddress: " + ex.Message); }
-            finally
+                this.Hide();
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
-
-            this.Hide();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
 
+        }
+
+        private bool IsInt (string input)
+        {
+            int num = 0;
+            if (int.TryParse(input, out num))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

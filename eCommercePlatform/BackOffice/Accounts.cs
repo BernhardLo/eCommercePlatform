@@ -22,7 +22,7 @@ namespace BackOffice1
             ImportAdmins();
         }
 
-        private void ImportAdmins()
+        public void ImportAdmins()
         {
             listBox1.Items.Clear();
 
@@ -94,6 +94,11 @@ namespace BackOffice1
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            ImportAdmins();
         }
     }
 }

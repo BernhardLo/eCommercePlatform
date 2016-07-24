@@ -32,6 +32,7 @@
             this.buttonDeleteAccount = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCreateAccount
@@ -72,11 +73,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Location = new System.Drawing.Point(10, 33);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(21, 23);
+            this.buttonUpdate.TabIndex = 6;
+            this.buttonUpdate.Text = "§";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // Accounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(436, 411);
+            this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.buttonDeleteAccount);
@@ -93,5 +105,6 @@
         private System.Windows.Forms.Button buttonDeleteAccount;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }

@@ -23,40 +23,46 @@ namespace BackOffice1
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            try
+            if (!String.IsNullOrWhiteSpace(textBox1.Text) && !String.IsNullOrWhiteSpace(textBox2.Text))
             {
-                myConnection.Open();
-                myCommand.Connection = myConnection;
-                myCommand.CommandText = $"spCreateAdmin";
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Clear();
-
-                SqlParameter _new_aid = new SqlParameter("@new_AID", SqlDbType.Int);
-                _new_aid.Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add(_new_aid);
-
-                SqlParameter _adminlogin = new SqlParameter("@AdminLogin", SqlDbType.VarChar);
-                _adminlogin.Value = textBox1.Text;
-                myCommand.Parameters.Add(_adminlogin);
-
-                SqlParameter _adminpassword = new SqlParameter("@AdminPassword", SqlDbType.VarChar);
-                _adminpassword.Value = textBox2.Text;
-                myCommand.Parameters.Add(_adminpassword);
-
-
-                int result = myCommand.ExecuteNonQuery();
-                if (result == 1)
+                try
                 {
-                    MessageBox.Show("Admin Created.");
-                }
+                    myConnection.Open();
+                    myCommand.Connection = myConnection;
+                    myCommand.CommandText = $"spCreateAdmin";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.Clear();
 
-            }
-            catch (Exception ex) { MessageBox.Show("spCreateAdmin: " + ex.Message); }
-            finally
+                    SqlParameter _new_aid = new SqlParameter("@new_AID", SqlDbType.Int);
+                    _new_aid.Direction = ParameterDirection.Output;
+                    myCommand.Parameters.Add(_new_aid);
+
+                    SqlParameter _adminlogin = new SqlParameter("@AdminLogin", SqlDbType.VarChar);
+                    _adminlogin.Value = textBox1.Text;
+                    myCommand.Parameters.Add(_adminlogin);
+
+                    SqlParameter _adminpassword = new SqlParameter("@AdminPassword", SqlDbType.VarChar);
+                    _adminpassword.Value = textBox2.Text;
+                    myCommand.Parameters.Add(_adminpassword);
+
+
+                    int result = myCommand.ExecuteNonQuery();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Admin Created.");
+                    }
+
+                }
+                catch (Exception ex) { MessageBox.Show("spCreateAdmin: " + ex.Message); }
+                finally
+                {
+                    myConnection.Close();
+                }
+                this.Hide();
+            } else
             {
-                myConnection.Close();
+                MessageBox.Show("Invalid Input");
             }
-            this.Hide();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
