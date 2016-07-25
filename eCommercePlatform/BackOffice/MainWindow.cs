@@ -302,7 +302,7 @@ namespace BackOffice1
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
         {
             int result = 0;
-            if (!String.IsNullOrWhiteSpace(textBox2.Text) && !String.IsNullOrWhiteSpace(textBoxProductInfo.Text) && IsInt(textBoxPrice.Text) && IsInt(textBoxQuantity.Text))
+            if (!String.IsNullOrWhiteSpace(textBox2.Text) && !String.IsNullOrWhiteSpace(textBoxProductInfo.Text) && IsInt(textBoxQuantity.Text))
             {
                 try
                 {
